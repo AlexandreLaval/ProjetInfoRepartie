@@ -1,4 +1,4 @@
-package professeur;
+package specialite;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,13 +13,8 @@ import javax.persistence.Id;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Professeur {
+public class Specialite {
     @Id
-    private Integer numProf;
-    private String login;
-    private String mdp;
-    private String email;
-    private String nomProf;
-    private String prenomProf;
-    private String numClasse;
+    private Integer numSpec;
+    private String libelle;
 }

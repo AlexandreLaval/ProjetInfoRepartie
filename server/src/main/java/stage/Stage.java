@@ -1,4 +1,4 @@
-package etudiant;
+package stage;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,14 +14,15 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Etudiant {
+public class Stage {
     @Id
+    private Integer numStage;
+    private String typeStage;
+    private String observation;
+    private LocalDate debutStage;
+    private LocalDate finStage;
+    private String descProjet;
+    private Integer numEntreprise;
     private Integer numEtudiant;
-    private String prenomEtudiant;
-    private String nomEtudiant;
-    private Integer numClasse;
-    private String login;
-    private String mdp;
-    private Boolean enActivite;
-    private LocalDate anneeObtention;
+    private Integer numProf;
 }
