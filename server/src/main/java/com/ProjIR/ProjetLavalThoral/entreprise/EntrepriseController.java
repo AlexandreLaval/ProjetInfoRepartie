@@ -1,12 +1,9 @@
-package entreprise;
+package com.ProjIR.ProjetLavalThoral.entreprise;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,12 +19,14 @@ public class EntrepriseController {
 
     @GetMapping("/{numEntreprise}")
     public ResponseEntity<Entreprise> description(
-            @RequestParam(value = "numEntreprise", defaultValue = "0") Integer numEntreprise) {
+            @PathVariable(value = "numEntreprise") Integer numEntreprise) {
+        System.out.println(this.entrepriseService.findByNumEntreprise(numEntreprise));
         return new ResponseEntity<>(this.entrepriseService.findByNumEntreprise(numEntreprise), HttpStatus.OK);
     }
 
     @GetMapping("/s")
     public ResponseEntity<List<Entreprise>> Entreprises() {
+        System.out.println(this.entrepriseService.findAllEntreprise());
         return new ResponseEntity<>(this.entrepriseService.findAllEntreprise(), HttpStatus.OK);
     }
 
@@ -36,9 +35,10 @@ public class EntrepriseController {
         return "Hello";
     }
 
+    @PostMapping()
     public ResponseEntity<Entreprise> create(
-            @RequestParam(value = "entrepriseInput") final EntrepriseInput entrepriseInput) {
-        return new ResponseEntity<>(this.entrepriseService.create(entrepriseInput), HttpStatus.OK);
+            @RequestParam(value = "entrepriseInput") final Entreprise entreprise) {
+        return new ResponseEntity<>(this.entrepriseService.create(entreprise), HttpStatus.OK);
     }
 
 
