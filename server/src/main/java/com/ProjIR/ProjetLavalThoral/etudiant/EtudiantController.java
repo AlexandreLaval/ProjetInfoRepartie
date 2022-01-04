@@ -39,4 +39,9 @@ public class EtudiantController {
         return new ResponseEntity<>(this.etudiantService.modify(newEtudiant, numEtudiant), HttpStatus.OK);
     }
 
+    @DeleteMapping("/{numEtudiant}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Integer numEtudiant) {
+        this.etudiantService.delete(numEtudiant);
+        return ResponseEntity.noContent().build();
+    }
 }

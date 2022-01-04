@@ -36,5 +36,4 @@ public class Professeur {
 
     @Column(name = "num_classe")
     private String numClasse;
-
 }

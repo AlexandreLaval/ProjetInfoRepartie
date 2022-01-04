@@ -47,4 +47,10 @@ public class EntrepriseController {
             @PathVariable(value = "numEntreprise") Integer numEntreprise) {
         return new ResponseEntity<>(this.entrepriseService.modify(entreprise, numEntreprise), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{numEntreprise}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Integer numEntreprise) {
+        this.entrepriseService.delete(numEntreprise);
+        return ResponseEntity.noContent().build();
+    }
 }

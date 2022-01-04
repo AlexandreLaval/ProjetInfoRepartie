@@ -15,7 +15,7 @@ public class EtudiantService {
     }
 
     Etudiant findEtuditantByNumEtudiant(Integer numEtudiant) {
-        return this.etudiantRepository.findEtudiantByNumEtudiant(numEtudiant);
+        return this.etudiantRepository.findById(numEtudiant).orElseThrow();
     }
 
     Etudiant create(Etudiant etudiant) {
@@ -38,5 +38,9 @@ public class EtudiantService {
                     newEtudiant.setNumEtudiant(newEtudiant.getNumEtudiant());
                     return this.etudiantRepository.save(newEtudiant);
                 });
+    }
+
+    public void delete(Integer id) {
+        this.etudiantRepository.deleteById(id);
     }
 }

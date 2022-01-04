@@ -11,7 +11,7 @@ public class EntrepriseService {
     EntrepriseRepository entrepriseRepository;
 
     public Entreprise findByNumEntreprise(Integer numEntreprise) {
-        return entrepriseRepository.findEntrepriseByNumEntreprise(numEntreprise);
+        return entrepriseRepository.findById(numEntreprise).orElseThrow();
     }
 
     public List<Entreprise> findAllEntreprise() {
@@ -45,5 +45,9 @@ public class EntrepriseService {
             newEntreprise.setNumEntreprise(id);
             return this.entrepriseRepository.save(newEntreprise);
         });
+    }
+
+    public void delete(Integer id) {
+        this.entrepriseRepository.deleteById(id);
     }
 }
