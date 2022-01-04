@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -59,5 +60,21 @@ public class Entreprise {
 
     @Column(name = "en_activite", nullable = false)
     private Boolean enActivite = false;
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o)
+            return true;
+        if (!(o instanceof Entreprise))
+            return false;
+        Entreprise entreprise = (Entreprise) o;
+        return Objects.equals(this.numEntreprise, entreprise.numEntreprise)
+                && Objects.equals(this.cpEntreprise, entreprise.cpEntreprise)
+                && Objects.equals(this.raisonSociale, entreprise.raisonSociale)
+                && Objects.equals(this.niveau, entreprise.niveau)
+                && Objects.equals(this.nomResp, entreprise.nomResp)
+                && Objects.equals(this.enActivite, entreprise.enActivite);
+    }
 
 }

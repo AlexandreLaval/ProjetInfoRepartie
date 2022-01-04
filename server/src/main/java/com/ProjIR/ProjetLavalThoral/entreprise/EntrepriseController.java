@@ -37,9 +37,14 @@ public class EntrepriseController {
 
     @PostMapping()
     public ResponseEntity<Entreprise> create(
-            @RequestParam(value = "entrepriseInput") final Entreprise entreprise) {
+            @RequestParam(value = "entreprise") final Entreprise entreprise) {
         return new ResponseEntity<>(this.entrepriseService.create(entreprise), HttpStatus.OK);
     }
 
-
+    @PutMapping("/{numEntreprise}")
+    public ResponseEntity<Entreprise> modify(
+            @RequestParam(value = "entreprise") final Entreprise entreprise,
+            @PathVariable(value = "numEntreprise") Integer numEntreprise) {
+        return new ResponseEntity<>(this.entrepriseService.modify(entreprise, numEntreprise), HttpStatus.OK);
+    }
 }

@@ -19,6 +19,31 @@ public class EntrepriseService {
     }
 
     public Entreprise create(Entreprise entreprise) {
-        return entreprise;
+        return this.entrepriseRepository.save(entreprise);
+    }
+
+    public Entreprise modify(Entreprise newEntreprise, Integer id) {
+        return this.entrepriseRepository.findById(id).map(
+                entreprise -> {
+                    entreprise.setCpEntreprise(newEntreprise.getCpEntreprise());
+                    entreprise.setFaxEntreprise(newEntreprise.getFaxEntreprise());
+                    entreprise.setNumEntreprise(newEntreprise.getNumEntreprise());
+                    entreprise.setRueEntreprise(newEntreprise.getRueEntreprise());
+                    entreprise.setSiteEntreprise(newEntreprise.getSiteEntreprise());
+                    entreprise.setEmail(newEntreprise.getEmail());
+                    entreprise.setEnActivite(newEntreprise.getEnActivite());
+                    entreprise.setNiveau(newEntreprise.getNiveau());
+                    entreprise.setNomContact(newEntreprise.getNomContact());
+                    entreprise.setRaisonSociale(newEntreprise.getRaisonSociale());
+                    entreprise.setNomResp(newEntreprise.getNomResp());
+                    entreprise.setVilleEntreprise(newEntreprise.getVilleEntreprise());
+                    entreprise.setTelEntreprise(newEntreprise.getTelEntreprise());
+                    entreprise.setObservation(newEntreprise.getObservation());
+                    return this.entrepriseRepository.save(entreprise);
+                }
+        ).orElseGet(() -> {
+            newEntreprise.setNumEntreprise(id);
+            return this.entrepriseRepository.save(newEntreprise);
+        });
     }
 }
