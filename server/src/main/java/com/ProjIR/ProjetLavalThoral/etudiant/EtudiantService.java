@@ -14,7 +14,11 @@ public class EtudiantService {
         return this.etudiantRepository.findAll();
     }
 
-    Etudiant findEtuditantByNumEtudiant(Integer numEtudiant) {
+    Etudiant findEtudiantByLogin(String login) {
+        return this.etudiantRepository.findEtudiantByLogin(login);
+    }
+
+    Etudiant findEtudiantByNumEtudiant(Integer numEtudiant) {
         return this.etudiantRepository.findById(numEtudiant).orElseThrow();
     }
 

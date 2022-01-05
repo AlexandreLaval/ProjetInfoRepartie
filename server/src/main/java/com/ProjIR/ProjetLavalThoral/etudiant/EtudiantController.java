@@ -20,7 +20,7 @@ public class EtudiantController {
     @GetMapping("/{numEtudiant}")
     public ResponseEntity<Etudiant> description(
             @PathVariable(value = "numEtudiant") Integer numEtudiant) {
-        return new ResponseEntity<>(this.etudiantService.findEtuditantByNumEtudiant(numEtudiant), HttpStatus.OK);
+        return new ResponseEntity<>(this.etudiantService.findEtudiantByNumEtudiant(numEtudiant), HttpStatus.OK);
     }
 
     @GetMapping()
