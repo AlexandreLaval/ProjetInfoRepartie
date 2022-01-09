@@ -36,6 +36,7 @@ import {Component} from "@angular/core";
   styles: [`
     .left-side {
       margin-left: auto;
+      padding: 5px;
     }
 
     .navbar-button {
