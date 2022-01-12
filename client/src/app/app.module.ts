@@ -36,10 +36,11 @@ import {MatSelectModule} from "@angular/material/select";
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }
