@@ -17,6 +17,12 @@ public class EtudiantController {
         this.etudiantService = etudiantService;
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<Boolean> authEtudiant(String login, String mdp) {
+        Etudiant etudiant = this.etudiantService.findEtudiantByLogin(login);
+        return new ResponseEntity<>(mdp.equals(etudiant.getMdp()), HttpStatus.OK);
+    }
+
     @GetMapping("/{numEtudiant}")
     public ResponseEntity<Etudiant> description(
             @PathVariable(value = "numEtudiant") Integer numEtudiant) {

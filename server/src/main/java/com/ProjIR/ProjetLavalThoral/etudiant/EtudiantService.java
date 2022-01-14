@@ -44,6 +44,10 @@ public class EtudiantService {
                 });
     }
 
+    Boolean authEtudiant(String login, String mdp) {
+       return mdp.equals(this.etudiantRepository.findEtudiantByLogin(login).getMdp());
+    }
+
     public void delete(Integer id) {
         this.etudiantRepository.deleteById(id);
     }

@@ -16,6 +16,10 @@ import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
+import {MatTableModule} from "@angular/material/table";
+import {AideComponent} from "./components/aide/aide.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -25,6 +29,7 @@ import {MatSelectModule} from "@angular/material/select";
     StagiaireComponent,
     InscriptionComponent,
     EntrepriseComponent,
+    AideComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,10 @@ import {MatSelectModule} from "@angular/material/select";
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
