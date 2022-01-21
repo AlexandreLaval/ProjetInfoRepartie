@@ -20,34 +20,42 @@ import {MatTableModule} from "@angular/material/table";
 import {AideComponent} from "./components/aide/aide.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
+import {EntrepriseCreationComponent} from "./components/entreprise/entrepriseCreation.component";
+import {HttpClientModule} from "@angular/common/http";
+import {EntrepriseDetailsComponent} from "./components/entreprise/entrepriseDetails.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    NavbarComponent,
-    StagiaireComponent,
-    InscriptionComponent,
-    EntrepriseComponent,
-    AideComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTableModule,
-    MatDatepickerModule,
-    MatNativeDateModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        NavbarComponent,
+        StagiaireComponent,
+        InscriptionComponent,
+        EntrepriseComponent,
+        EntrepriseCreationComponent,
+        EntrepriseDetailsComponent,
+        AideComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatTableModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        HttpClientModule,
+        FormsModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 

@@ -1,4 +1,4 @@
-package com.ProjIR.ProjetLavalThoral.config;
+package com.ProjIR.ProjetLavalThoral;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
