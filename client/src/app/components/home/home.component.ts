@@ -1,4 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {LogInService} from "../../services/loginService";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -11,6 +13,17 @@ import {Component} from "@angular/core";
   `],
 })
 
-export class HomeComponent {
+export class HomeComponent implements  OnInit {
+
+
+  constructor(private loginService: LogInService,
+              private router: Router) {
+  }
+
+  ngOnInit() {
+    if(!this.loginService.isConnected){
+      this.router.navigate(['login']);
+    }
+  }
 
 }

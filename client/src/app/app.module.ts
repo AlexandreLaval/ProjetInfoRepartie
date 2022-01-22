@@ -23,7 +23,11 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {EntrepriseCreationComponent} from "./components/entreprise/entrepriseCreation.component";
 import {HttpClientModule} from "@angular/common/http";
 import {EntrepriseDetailsComponent} from "./components/entreprise/entrepriseDetails.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSortModule} from "@angular/material/sort";
+import {EntrepriseModifyComponent} from "./components/entreprise/entrepriseModify.component";
+import {LoginComponent} from "./components/login/login.component";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
     declarations: [
@@ -35,7 +39,9 @@ import {FormsModule} from "@angular/forms";
         EntrepriseComponent,
         EntrepriseCreationComponent,
         EntrepriseDetailsComponent,
+        EntrepriseModifyComponent,
         AideComponent,
+        LoginComponent
     ],
     imports: [
         BrowserModule,
@@ -52,7 +58,10 @@ import {FormsModule} from "@angular/forms";
         MatDatepickerModule,
         MatNativeDateModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        MatSortModule,
+        ReactiveFormsModule,
+        MatRadioModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

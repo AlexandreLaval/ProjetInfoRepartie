@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router";
 import {Entreprise} from "../../models/entreprise";
+import {ActivatedRoute, Router} from "@angular/router";
 import {EntrepriseService} from "../../services/entrepriseService";
 
 @Component({
-    selector: 'app-entreprise-creation',
+    selector: 'app-entreprise-modification',
     template: `
         <div class="div-margin">
             <div>
@@ -77,7 +77,7 @@ import {EntrepriseService} from "../../services/entrepriseService";
                 </mat-form-field>
             </div>
             <button mat-flat-button class="btn-validate" color="primary" (click)="cancel()">Retour</button>
-            <button mat-flat-button class="btn-validate" color="primary" (click)="onSubmit()">Ajouter</button>
+            <button mat-flat-button class="btn-validate" color="primary" (click)="onSubmit()">Modifier</button>
 
         </div>
     `,
@@ -104,7 +104,7 @@ import {EntrepriseService} from "../../services/entrepriseService";
     `]
 })
 
-export class EntrepriseCreationComponent implements OnInit {
+export class EntrepriseModifyComponent implements OnInit {
     entreprise: Entreprise = {
         cpEntreprise: '',
         faxEntreprise: '',
@@ -121,13 +121,21 @@ export class EntrepriseCreationComponent implements OnInit {
         observation: '',
         raisonSociale: '',
     };
+    idEnt: number = 0;
 
 
     constructor(private router: Router,
-                private entrepriseService: EntrepriseService) {
+                private entrepriseService: EntrepriseService,
+                private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+            this.idEnt = +params['id'];
+        });
+        this.entrepriseService.getEntreprise(this.idEnt).subscribe(ent => {
+            this.entreprise = ent;
+        });
     }
 
     isFormValid()
@@ -152,7 +160,7 @@ export class EntrepriseCreationComponent implements OnInit {
 
     onSubmit() {
         if (this.isFormValid()) {
-            this.entrepriseService.createEntreprise(this.entreprise).subscribe((response) => {
+            this.entrepriseService.modifyEntreprise(this.idEnt, this.entreprise).subscribe((response) => {
                     this.cancel();
                 },
                 (error) => {

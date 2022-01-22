@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {EntrepriseService} from "../../services/entrepriseService";
+import {LogInService} from "../../services/loginService";
 
 @Component({
     selector: 'app-entreprise',
@@ -16,7 +17,20 @@ import {EntrepriseService} from "../../services/entrepriseService";
                 <!-- Opération Column -->
                 <ng-container matColumnDef="opération">
                     <th mat-header-cell *matHeaderCellDef>Opération</th>
-                    <td mat-cell *matCellDef="let element">{{"+"}}</td>
+                    <td mat-cell *matCellDef="let element">
+                        <button *ngIf="isProf" mat-icon-button (click)="modifyEntreprise(element.numEntreprise)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button *ngIf="isProf"  mat-icon-button (click)="inscrireStagiaire(element.numEntreprise)">
+                            <mat-icon>man</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="seeEntreprise(element.numEntreprise)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button *ngIf="isProf"  mat-icon-button (click)="deleteEntreprise(element.numEntreprise)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
                 </ng-container>
 
                 <!-- Entreprise Column -->
@@ -63,14 +77,6 @@ import {EntrepriseService} from "../../services/entrepriseService";
         table {
             width: 100%;
         }
-
-        .btn-validate {
-            float: right;
-        }
-
-        .ent-form-field {
-            margin-right: 8px;
-        }
     `]
 })
 
@@ -78,13 +84,22 @@ export class EntrepriseComponent implements OnInit {
     displayedColumns: string[] = ['opération', 'entreprise', 'responsable', 'adresse', 'site', 'spécialité'];
     entreprises: any;
     profUser: boolean = true;
+    isProf: boolean = false;
 
     constructor(private router: Router,
                 private entrepriseService: EntrepriseService,
-                private activatedRoute: ActivatedRoute) {
+                private loginService: LogInService) {
     }
 
     ngOnInit() {
+        if (!this.loginService.isConnected) {
+            this.router.navigate(['login']);
+        }
+        this.isProf = this.loginService.isProfesseur;
+        this.fetchAllEntreprises();
+    }
+
+    fetchAllEntreprises() {
         this.entrepriseService.getAllEntreprises().subscribe(entreprises => {
             this.entreprises = entreprises;
         })
@@ -92,6 +107,29 @@ export class EntrepriseComponent implements OnInit {
 
     addEntreprise() {
         this.router.navigate(['entreprise', 'creation']);
-        //  this.router.navigate(['./creation'], {relativeTo: this.activatedRoute});
     }
+
+    seeEntreprise(idEntreprise: number) {
+        this.router.navigate(['/entreprise/' + idEntreprise]);
+    }
+
+    modifyEntreprise(idEntreprise: number) {
+        this.router.navigate(['/entreprise/modify/' + idEntreprise]);
+    }
+
+    deleteEntreprise(idEntreprise: number) {
+        this.entrepriseService.deleteEntreprise(idEntreprise).subscribe(() => {
+                this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+                    this.router.navigate(['/entreprise']);
+                });
+            },
+            error => {
+                alert("Erreur lors de la suppression d'une entreprise");
+            })
+    }
+
+    inscrireStagiaire(idEntreprise: number) {
+
+    }
+
 }

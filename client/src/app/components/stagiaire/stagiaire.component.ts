@@ -1,4 +1,6 @@
 import {Component} from "@angular/core";
+import {LogInService} from "../../services/loginService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-stagiaire',
@@ -59,5 +61,14 @@ import {Component} from "@angular/core";
 export class StagiaireComponent {
   creationForm: boolean = true;
 
+  constructor(private loginService: LogInService,
+              private router: Router) {
+  }
+
+  ngOnInit() {
+    if (!this.loginService.isConnected) {
+      this.router.navigate(['login']);
+    }
+  }
 
 }

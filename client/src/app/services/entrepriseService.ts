@@ -24,6 +24,10 @@ export class EntrepriseService {
         return this.http.post<Entreprise>(this.url + "/creation", entreprise);
     }
 
+    modifyEntreprise(id:number, entreprise: Entreprise): Observable<Entreprise> {
+        return this.http.put<Entreprise>(this.url + "/modify/" + id, entreprise);
+    }
+
     deleteEntreprise(id: number): Observable<number> {
         return this.http.delete<number>(this.url + "/" + id);
     }

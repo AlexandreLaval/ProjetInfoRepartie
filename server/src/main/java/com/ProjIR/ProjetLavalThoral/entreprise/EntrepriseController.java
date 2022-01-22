@@ -36,7 +36,7 @@ public class EntrepriseController {
         return new ResponseEntity<>(this.entrepriseService.create(entreprise), HttpStatus.OK);
     }
 
-    @PutMapping("/{numEntreprise}")
+    @PutMapping("/modify/{numEntreprise}")
     public ResponseEntity<Entreprise> modify(
             @RequestBody final Entreprise entreprise,
             @PathVariable(value = "numEntreprise") Integer numEntreprise) {

@@ -17,8 +17,10 @@ public class EtudiantController {
         this.etudiantService = etudiantService;
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<Boolean> authEtudiant(String login, String mdp) {
+    @GetMapping("/{login}/{mdp}")
+    public ResponseEntity<Boolean> authEtudiant(@PathVariable(value = "login") String login,
+                                                @PathVariable(value = "mdp") String mdp) {
+        System.out.println(login+ " " + mdp);
         Etudiant etudiant = this.etudiantService.findEtudiantByLogin(login);
         return new ResponseEntity<>(mdp.equals(etudiant.getMdp()), HttpStatus.OK);
     }
@@ -46,7 +48,7 @@ public class EtudiantController {
     }
 
     @DeleteMapping("/{numEtudiant}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable Integer numEtudiant) {
+    public ResponseEntity<?> delete(@PathVariable Integer numEtudiant) {
         this.etudiantService.delete(numEtudiant);
         return ResponseEntity.noContent().build();
     }
