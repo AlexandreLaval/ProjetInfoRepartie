@@ -34,7 +34,7 @@ public class StageController {
         return new ResponseEntity<>(this.stageService.findAllStage(), HttpStatus.OK);
     }
 
-    @GetMapping("/prof/{numEntreprise}")
+    @GetMapping("/entreprise/{numEntreprise}")
     public ResponseEntity<List<Stage>> listeAllStageForOneEntreprise(@PathVariable(value = "numEntreprise") Integer numEntreprise) {
         return new ResponseEntity<>(this.stageService.findAllStageByNumEntreprise(numEntreprise), HttpStatus.OK);
     }

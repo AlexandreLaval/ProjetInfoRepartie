@@ -46,7 +46,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'inscription',
+        path: 'inscription/creation',
         component: InscriptionComponent
     },
     {
