@@ -19,7 +19,8 @@ import {Subscription} from "rxjs";
                 <mat-icon>man</mat-icon>
                 Stagiaire
             </button>
-            <button mat-button class="navbar-button" (click)="clickEvent('inscription')" aria-label="Inscription">
+            <button mat-button class="navbar-button" (click)="clickEvent('inscription/creation')"
+                    aria-label="Inscription">
                 <mat-icon>assignment</mat-icon>
                 Inscription
             </button>
@@ -28,11 +29,13 @@ import {Subscription} from "rxjs";
                     <mat-icon>help</mat-icon>
                     Aide
                 </button>
-                <button mat-button class="navbar-button" aria-label="Connexion" *ngIf="this.login===''" (click)="onLogin()">
+                <button mat-button class="navbar-button" aria-label="Connexion" *ngIf="this.login===''"
+                        (click)="onLogin()">
                     <mat-icon>logout</mat-icon>
                     Connexion
                 </button>
-                <button mat-button class="navbar-button" aria-label="Déconnexion" *ngIf="this.login!==''" (click)="onLogout()">
+                <button mat-button class="navbar-button" aria-label="Déconnexion" *ngIf="this.login!==''"
+                        (click)="onLogout()">
                     <mat-icon>login</mat-icon>
                     Déconnexion
                 </button>
