@@ -8,7 +8,7 @@ import {LogInService} from "../../services/loginService";
     template: `
         <div class="div-margin">
             <h2>Liste des entreprises</h2>
-            <div class="ent-table" *ngIf="profUser">
+            <div class="ent-table" *ngIf="isProf">
                 <button mat-raised-button (click)="addEntreprise()" class="demo-button div-margin">
                     Ajouter une entreprise
                 </button>
@@ -83,7 +83,6 @@ import {LogInService} from "../../services/loginService";
 export class EntrepriseComponent implements OnInit {
     displayedColumns: string[] = ['opération', 'entreprise', 'responsable', 'adresse', 'site', 'spécialité'];
     entreprises: any;
-    profUser: boolean = true;
     isProf: boolean = false;
 
     constructor(private router: Router,

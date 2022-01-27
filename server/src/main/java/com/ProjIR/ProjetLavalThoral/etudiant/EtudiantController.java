@@ -36,12 +36,12 @@ public class EtudiantController {
         return new ResponseEntity<>(this.etudiantService.findAllEtudiant(), HttpStatus.OK);
     }
 
-    @PostMapping()
-    public ResponseEntity<Etudiant> create(@RequestParam(value = "etudiant") final Etudiant etudiant) {
+    @PostMapping("/creation")
+    public ResponseEntity<Etudiant> create(@RequestBody final Etudiant etudiant) {
         return new ResponseEntity<>(this.etudiantService.create(etudiant), HttpStatus.OK);
     }
 
-    @PutMapping("/{numEtudiant}")
+    @PutMapping("/modify/{numEtudiant}")
     public ResponseEntity<Etudiant> modify(@RequestParam(value = "etudiant") final Etudiant newEtudiant,
                                            @PathVariable(value = "numEtudiant") Integer numEtudiant) {
         return new ResponseEntity<>(this.etudiantService.modify(newEtudiant, numEtudiant), HttpStatus.OK);

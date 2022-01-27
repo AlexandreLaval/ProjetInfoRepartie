@@ -104,7 +104,7 @@ import {EntrepriseService} from "../../services/entrepriseService";
     `]
 })
 
-export class EntrepriseCreationComponent implements OnInit {
+export class EntrepriseCreationComponent {
     entreprise: Entreprise = {
         cpEntreprise: '',
         faxEntreprise: '',
@@ -127,12 +127,7 @@ export class EntrepriseCreationComponent implements OnInit {
                 private entrepriseService: EntrepriseService) {
     }
 
-    ngOnInit() {
-    }
-
-    isFormValid()
-        :
-        boolean {
+    isFormValid(): boolean {
         switch ('') {
             case this.entreprise.cpEntreprise:
                 return false;
