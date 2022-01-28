@@ -28,6 +28,7 @@ import {MatSortModule} from "@angular/material/sort";
 import {EntrepriseModifyComponent} from "./components/entreprise/entrepriseModify.component";
 import {LoginComponent} from "./components/login/login.component";
 import {MatRadioModule} from "@angular/material/radio";
+import {StagiaireCreationComponent} from "./components/stagiaire/stagiaireCreation.component";
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import {MatRadioModule} from "@angular/material/radio";
         HomeComponent,
         NavbarComponent,
         StagiaireComponent,
+        StagiaireCreationComponent,
         InscriptionComponent,
         EntrepriseComponent,
         EntrepriseCreationComponent,

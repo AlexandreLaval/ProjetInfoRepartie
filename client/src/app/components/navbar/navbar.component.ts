@@ -25,7 +25,7 @@ import {Subscription} from "rxjs";
                 Inscription
             </button>
             <div class="left-side">
-                <button mat-button class="navbar-button" aria-label="Aide">
+                <button mat-button class="navbar-button" aria-label="Aide" (click)="clickEvent('aide')">
                     <mat-icon>help</mat-icon>
                     Aide
                 </button>
