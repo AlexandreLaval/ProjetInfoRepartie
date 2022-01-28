@@ -1,5 +1,7 @@
 package com.ProjIR.ProjetLavalThoral.stage;
 
+import com.ProjIR.ProjetLavalThoral.entreprise.Entreprise;
+import com.ProjIR.ProjetLavalThoral.etudiant.Etudiant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,7 @@ public class StageService {
         return this.stageRepository.findById(numStage).orElseThrow();
     }
 
-    public List<Stage> findAllStageByNumEntreprise(Integer numEntreprise) {
+    public List<Stage> findAllStageByNumEntreprise(Entreprise numEntreprise) {
         return this.stageRepository.findAllByNumEntreprise(numEntreprise);
     }
 
@@ -22,8 +24,8 @@ public class StageService {
         return this.stageRepository.findAll();
     }
 
-    public Stage findStageByNumEtudiant(Integer numEtudiant) {
-        return this.stageRepository.findStageByNumEtudiant(numEtudiant);
+    public List<Stage> findAllStageByNumEtudiant(Etudiant numEtudiant) {
+        return this.stageRepository.findAllByNumEtudiant(numEtudiant);
     }
 
     Stage create(Stage stage) {

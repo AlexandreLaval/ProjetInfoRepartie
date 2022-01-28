@@ -74,7 +74,7 @@ import {EtudiantService} from "../../services/etudiantService";
             </div>
         </form>
 
-        <button mat-flat-button class="btn-validate" color="primary" (click)="onSubmit()">Ajouter</button>
+        <button mat-flat-button class="btn-validate div-margin" color="primary" (click)="onSubmit()">Ajouter</button>
     `,
     styles: [`
 
@@ -106,6 +106,7 @@ export class InscriptionComponent implements OnInit {
         numEntreprise: '',
         observation: ''
     }
+
     entreprises: any;
     etudiants: any;
     professeurs: any;

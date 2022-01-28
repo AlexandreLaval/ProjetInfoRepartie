@@ -26,7 +26,6 @@ public class EntrepriseController {
 
     @GetMapping()
     public ResponseEntity<List<Entreprise>> Entreprises() {
-        System.out.println(this.entrepriseService.findAllEntreprise());
         return new ResponseEntity<>(this.entrepriseService.findAllEntreprise(), HttpStatus.OK);
     }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {Router} from "@angular/router";
 import {Entreprise} from "../../models/entreprise";
 import {EntrepriseService} from "../../services/entrepriseService";
@@ -78,7 +78,6 @@ import {EntrepriseService} from "../../services/entrepriseService";
             </div>
             <button mat-flat-button class="btn-validate" color="primary" (click)="cancel()">Retour</button>
             <button mat-flat-button class="btn-validate" color="primary" (click)="onSubmit()">Ajouter</button>
-
         </div>
     `,
     styles: [`

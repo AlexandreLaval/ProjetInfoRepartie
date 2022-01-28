@@ -25,6 +25,7 @@ export class StageService {
     }
 
     getStagesByNumEntreprise(id: number): Observable<Array<Stage>> {
+        console.log(this.url + "/entreprise/" + id);
         return this.http.get<Array<Stage>>(this.url + "/entreprise/" + id);
     }
 
