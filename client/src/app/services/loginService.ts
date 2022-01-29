@@ -10,7 +10,7 @@ export class LogInService {
     login = new BehaviorSubject<string>('');
     _login = this.login.asObservable();
     isConnected = false;
-    isProfesseur = false;
+    isProfesseur = true;
 
     urlEtudiant = "http://localhost:8080/etudiant/";
     urlProf = "http://localhost:8080/professeur/";

@@ -21,13 +21,13 @@ import {LogInService} from "../../services/loginService";
                         <button *ngIf="isProf" mat-icon-button (click)="modifyEntreprise(element.numEntreprise)">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button *ngIf="isProf"  mat-icon-button (click)="inscrireStagiaire(element.numEntreprise)">
+                        <button *ngIf="isProf" mat-icon-button (click)="inscrireStagiaire(element.numEntreprise)">
                             <mat-icon>man</mat-icon>
                         </button>
                         <button mat-icon-button (click)="seeEntreprise(element.numEntreprise)">
                             <mat-icon>visibility</mat-icon>
                         </button>
-                        <button *ngIf="isProf"  mat-icon-button (click)="deleteEntreprise(element.numEntreprise)">
+                        <button *ngIf="isProf" mat-icon-button (click)="deleteEntreprise(element.numEntreprise)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>
@@ -127,8 +127,9 @@ export class EntrepriseComponent implements OnInit {
             })
     }
 
+    //todo link le fait de créer le stage avec l'entreprise préselectionnée
     inscrireStagiaire(idEntreprise: number) {
-
+        this.router.navigate(['/inscription/creation/']);
     }
 
 }
