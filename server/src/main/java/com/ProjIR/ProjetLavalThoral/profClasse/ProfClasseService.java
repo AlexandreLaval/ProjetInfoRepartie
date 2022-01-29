@@ -10,7 +10,11 @@ public class ProfClasseService {
     @Autowired
     private ProfClasseRepository profClasseRepository;
 
-    List<ProfClasse> getAllProfClass() {
+    public List<ProfClasse> getAllProfClasse() {
         return this.profClasseRepository.findAll();
+    }
+
+    public ProfClasse getProfClasseFromNumProf(Integer numProf) {
+        return this.profClasseRepository.findById(numProf).orElseThrow();
     }
 }

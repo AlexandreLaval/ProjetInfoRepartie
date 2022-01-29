@@ -2,6 +2,10 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EntrepriseService} from "../../services/entrepriseService";
 import {StageService} from "../../services/stageService";
+import {SpecialiteService} from "../../services/specialiteService";
+import {SpecEntrepriseService} from "../../services/specEntrepriseService";
+import {Specialite} from "../../models/specialite";
+import {SpecEntreprise} from "../../models/specEntreprise";
 
 @Component({
     selector: 'app-entreprise-detail',
@@ -27,7 +31,7 @@ import {StageService} from "../../services/stageService";
                 <br>
                 <td>Niveau : {{this.entreprise.niveau}}</td>
                 <br>
-                <td>Spécialité : STMG</td>
+                <td>Spécialité : {{this.specialite}}</td>
                 <br>
             </mat-card-content>
         </mat-card>
@@ -104,11 +108,14 @@ export class EntrepriseDetailsComponent implements OnInit {
     entreprise: any;
     isProf: boolean = true;
     stages: any;
+    specialite: string = "";
 
     constructor(private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private entrepriseService: EntrepriseService,
-                public stageService: StageService) {
+                public stageService: StageService,
+                public specialiteService: SpecialiteService,
+                public specEntrepriseService: SpecEntrepriseService) {
     }
 
     ngOnInit() {
@@ -120,6 +127,13 @@ export class EntrepriseDetailsComponent implements OnInit {
         });
         this.stageService.getStagesByNumEntreprise(this.idEnt).subscribe(stages => {
             this.stages = stages;
+        })
+        this.specEntrepriseService.getSpecEntreprisesFromNumEntreprise(this.idEnt).subscribe(specEntreprise => {
+            specEntreprise.forEach(spec => {
+                this.specialiteService.getSpecialiteFromNumSpec(spec.numSpec).subscribe(s => {
+                    this.specialite = s.libelle;
+                })
+            })
         })
     }
 
