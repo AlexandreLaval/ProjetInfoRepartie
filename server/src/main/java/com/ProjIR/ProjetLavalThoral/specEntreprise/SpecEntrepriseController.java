@@ -1,5 +1,6 @@
 package com.ProjIR.ProjetLavalThoral.specEntreprise;
 
+import com.ProjIR.ProjetLavalThoral.entreprise.Entreprise;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,18 @@ public class SpecEntrepriseController {
     @GetMapping()
     public ResponseEntity<List<SpecEntreprise>> getAllSpecEntreprises() {
         return new ResponseEntity<>(this.specEntrepriseService.getAllSpecEntreprises(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{numEntreprise}")
+    public ResponseEntity<List<SpecEntreprise>> getSpecEntreprisesFromNumEntreprise(@PathVariable(value = "numEntreprise")  Integer numEntreprise) {
+        return new ResponseEntity<>(this.specEntrepriseService.getSpecEntreprisesFromNumEntreprise(numEntreprise), HttpStatus.OK);
+    }
+
+    @PutMapping("/modify/{numEntreprise}")
+    public ResponseEntity<SpecEntreprise> modify(
+            @RequestBody final SpecEntreprise specEntreprise,
+            @PathVariable(value = "numEntreprise") Integer numEntreprise) {
+        return new ResponseEntity<>(this.specEntrepriseService.modify(specEntreprise, numEntreprise), HttpStatus.OK);
     }
 
     @PostMapping("/creation")

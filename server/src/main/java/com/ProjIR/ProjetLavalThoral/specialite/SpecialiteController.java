@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/specialite")
 public class SpecialiteController {
@@ -13,6 +15,17 @@ public class SpecialiteController {
     @Autowired
     SpecialiteController(SpecialiteService specialiteService) {
         this.specialiteService = specialiteService;
+    }
+
+
+    @GetMapping()
+    public ResponseEntity<List<Specialite>> getAllSpecialites() {
+        return new ResponseEntity<>(this.specialiteService.getAllSpecialites(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{numSpec}")
+    public ResponseEntity<Specialite> getSpecialiteFromNumSpec(@PathVariable(value = "numSpec")  Integer numSpec) {
+        return new ResponseEntity<>(this.specialiteService.getSpecialiteFromNumSpec(numSpec), HttpStatus.OK);
     }
 
     @PostMapping()

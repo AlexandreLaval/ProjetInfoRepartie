@@ -2,6 +2,9 @@ import {Component, OnInit} from "@angular/core";
 import {Entreprise} from "../../models/entreprise";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EntrepriseService} from "../../services/entrepriseService";
+import {SpecEntrepriseService} from "../../services/specEntrepriseService";
+import {SpecialiteService} from "../../services/specialiteService";
+import {SpecEntreprise} from "../../models/specEntreprise";
 
 @Component({
     selector: 'app-entreprise-modification',
@@ -71,8 +74,9 @@ import {EntrepriseService} from "../../services/entrepriseService";
                 <h2>Spécialité</h2>
                 <mat-form-field appearance="fill" class="ent-form-field">
                     <mat-label>Spécialité</mat-label>
-                    <mat-select>
-                        <mat-option value="option">Option</mat-option>
+                    <mat-select [(value)]="this.specEntreprise.numSpec">
+                        <mat-option *ngFor="let specialite of specialites"
+                                    [value]="specialite.numSpec">{{specialite.libelle}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -122,10 +126,17 @@ export class EntrepriseModifyComponent implements OnInit {
         raisonSociale: '',
     };
     idEnt: number = 0;
+    specEntreprise: SpecEntreprise = {
+        numEntreprise: 0,
+        numSpec: 0,
+    };
+    specialites: any;
 
 
     constructor(private router: Router,
                 private entrepriseService: EntrepriseService,
+                private specEntrepriseService: SpecEntrepriseService,
+                private specialiteService: SpecialiteService,
                 private activatedRoute: ActivatedRoute) {
     }
 
@@ -136,6 +147,14 @@ export class EntrepriseModifyComponent implements OnInit {
         this.entrepriseService.getEntreprise(this.idEnt).subscribe(ent => {
             this.entreprise = ent;
         });
+        this.specEntrepriseService.getSpecEntreprisesFromNumEntreprise(this.idEnt).subscribe(specEnts => {
+            specEnts.forEach(specEnt => this.specEntreprise = specEnt)
+        })
+
+
+        this.specialiteService.getAllSpecialites().subscribe(specs => {
+            this.specialites = specs;
+        })
     }
 
     isFormValid()
@@ -161,7 +180,9 @@ export class EntrepriseModifyComponent implements OnInit {
     onSubmit() {
         if (this.isFormValid()) {
             this.entrepriseService.modifyEntreprise(this.idEnt, this.entreprise).subscribe((response) => {
-                    this.cancel();
+                    this.specEntrepriseService.modifyEntreprise(this.idEnt, this.specEntreprise).subscribe(() =>
+                        this.cancel()
+                    );
                 },
                 (error) => {
                     alert("Erreur - Merci de vérifier que tous les champs soient remplis correctement");
