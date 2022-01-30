@@ -14,7 +14,15 @@ public class ProfClasseService {
         return this.profClasseRepository.findAll();
     }
 
+    public List<ProfClasse> getAllProfPrincipalClasse() {
+        return this.profClasseRepository.findAllProfClasseByEstProfPrincipal(true);
+    }
+
     public ProfClasse getProfClasseFromNumProf(Integer numProf) {
         return this.profClasseRepository.findById(numProf).orElseThrow();
+    }
+
+    public ProfClasse getProfClasseFromNumClasseAndPPVrai(Integer numClasse) {
+        return this.profClasseRepository.findByNumClasseAndEstProfPrincipal(numClasse, true);
     }
 }

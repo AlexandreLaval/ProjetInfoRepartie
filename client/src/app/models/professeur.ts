@@ -1,5 +1,5 @@
 export interface Professeur{
-    numProf: number | undefined;
+    numProf: number;
     nomProf: string;
     prenomProf: string;
     login: string;

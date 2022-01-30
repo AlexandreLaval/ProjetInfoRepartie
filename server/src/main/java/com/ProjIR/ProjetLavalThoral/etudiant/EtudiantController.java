@@ -20,7 +20,7 @@ public class EtudiantController {
     @GetMapping("/{login}/{mdp}")
     public ResponseEntity<Boolean> authEtudiant(@PathVariable(value = "login") String login,
                                                 @PathVariable(value = "mdp") String mdp) {
-        System.out.println(login+ " " + mdp);
+        System.out.println(login + " " + mdp);
         Etudiant etudiant = this.etudiantService.findEtudiantByLogin(login);
         return new ResponseEntity<>(mdp.equals(etudiant.getMdp()), HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class EtudiantController {
     }
 
     @PutMapping("/modify/{numEtudiant}")
-    public ResponseEntity<Etudiant> modify(@RequestParam(value = "etudiant") final Etudiant newEtudiant,
+    public ResponseEntity<Etudiant> modify(@RequestBody final Etudiant newEtudiant,
                                            @PathVariable(value = "numEtudiant") Integer numEtudiant) {
         return new ResponseEntity<>(this.etudiantService.modify(newEtudiant, numEtudiant), HttpStatus.OK);
     }

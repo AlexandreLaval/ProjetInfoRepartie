@@ -101,9 +101,6 @@ export class InscriptionComponent implements OnInit {
         typeStage: '',
         descProjet: '',
         observationStage: '',
-        numEtudiant: '',
-        numProf: '',
-        numEntreprise: '',
         observation: ''
     }
 
@@ -137,12 +134,6 @@ export class InscriptionComponent implements OnInit {
 
     isFormValid(): boolean {
         switch ('') {
-            case this.stage.numEtudiant:
-                return false;
-            case this.stage.numProf:
-                return false;
-            case this.stage.numEntreprise:
-                return false;
             case this.stage.debutStage:
                 return false;
             case this.stage.finStage:
@@ -150,7 +141,9 @@ export class InscriptionComponent implements OnInit {
             case this.stage.typeStage:
                 return false;
         }
-        return true;
+        return !(this.stage.numEtudiant === undefined ||
+            this.stage.numProf === undefined ||
+            this.stage.numEntreprise === undefined);
     }
 
     onSubmit() {

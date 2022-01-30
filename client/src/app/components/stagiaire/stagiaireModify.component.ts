@@ -1,12 +1,12 @@
 import {LogInService} from "../../services/loginService";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Component, OnInit} from "@angular/core";
 import {Etudiant} from "../../models/etudiant";
 import {EtudiantService} from "../../services/etudiantService";
 import {ClasseService} from "../../services/classeService";
 
 @Component({
-    selector: 'app-stagiaire-creation',
+    selector: 'app-stagiaire-modification',
     template: `
         <div class="div-margin">
             <div>
@@ -38,13 +38,13 @@ import {ClasseService} from "../../services/classeService";
                 <br>
                 <mat-form-field class="stag-form-field" appearance="fill">
                     <mat-label>Classe</mat-label>
-                    <mat-select [(value)]="this.etudiant.numClasse">
-                        <mat-option *ngFor="let classe of classes" [value]="classe">{{classe.nomClasse}}</mat-option>
+                    <mat-select [(value)]="etudiant.numClasse">
+                        <mat-option *ngFor="let classe of classes" [value]="classe" >{{classe.nomClasse}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
             <button mat-flat-button class="btn-validate" color="primary" (click)="cancel()">Retour</button>
-            <button mat-flat-button class="btn-validate" color="primary" (click)="onSubmit()">Ajouter</button>
+            <button mat-flat-button class="btn-validate" color="primary" (click)="onSubmit()">Modifier</button>
         </div>
     `,
     styles: [`
@@ -74,9 +74,10 @@ import {ClasseService} from "../../services/classeService";
 
 })
 
-export class StagiaireCreationComponent implements OnInit {
+export class StagiaireModifyComponent implements OnInit {
     creationForm: boolean = true;
     classes: any;
+    idEtudiant: any;
     etudiant: Etudiant = {
         nomEtudiant: '',
         prenomEtudiant: '',
@@ -95,10 +96,17 @@ export class StagiaireCreationComponent implements OnInit {
     constructor(private loginService: LogInService,
                 private router: Router,
                 private etudiantService: EtudiantService,
-                private classeService: ClasseService) {
+                private classeService: ClasseService,
+                private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit() {
+        this.activatedRoute.params.subscribe(params => {
+            this.idEtudiant = +params['id'];
+        });
+        this.etudiantService.getEtudiant(this.idEtudiant).subscribe(etu => {
+            this.etudiant = etu;
+        })
         this.classeService.getAllClasses().subscribe(classes => {
             this.classes = classes;
         })
@@ -115,18 +123,16 @@ export class StagiaireCreationComponent implements OnInit {
             case this.etudiant.mdp:
                 return false;
         }
-        if (this.etudiant.anneeObtention == null)
-            return false;
         return true;
     }
 
     onSubmit() {
         if (this.isFormValid()) {
-            this.etudiantService.createEtudiant(this.etudiant).subscribe((response) => {
+            this.etudiantService.modifyEtudiant(this.idEtudiant, this.etudiant).subscribe((response) => {
                     this.cancel();
                 },
                 (error) => {
-                    alert("Erreur - Merci de vérifier que tous les champs soient remplis correctement");
+                    alert("Erreur lors de la modification");
                 });
         } else {
             alert("Erreur - Merci de vérifier que tous les champs soient remplis correctement");

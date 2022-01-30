@@ -9,8 +9,8 @@ export interface Stage {
     typeStage: string;
     descProjet: string;
     observationStage: string;
-    numEtudiant: Etudiant | string;
-    numProf: Professeur | string;
-    numEntreprise: Entreprise | string;
+    numEtudiant?: Etudiant;
+    numProf?: Professeur;
+    numEntreprise?: Entreprise;
     observation: string;
 }

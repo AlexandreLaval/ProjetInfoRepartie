@@ -19,4 +19,8 @@ export class ProfClasseService {
     getProfClasseFromNumProf(numProf: number): Observable<ProfClasse> {
         return this.http.get<ProfClasse>(this.url + "/" + numProf);
     }
+
+    getProfClasseFromNumClasse(numClasse: number): Observable<ProfClasse> {
+        return this.http.get<ProfClasse>(this.url + "classe/" + numClasse);
+    }
 }

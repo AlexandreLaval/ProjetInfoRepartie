@@ -21,12 +21,17 @@ public class ProfClasseController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<ProfClasse>> getAllProfClasses() {
-        return new ResponseEntity<>(this.profClasseService.getAllProfClasse(), HttpStatus.OK);
+    public ResponseEntity<List<ProfClasse>> getAllProfPrincipalClasses() {
+        return new ResponseEntity<>(this.profClasseService.getAllProfPrincipalClasse(), HttpStatus.OK);
     }
 
     @GetMapping("/{numProf}")
     public ResponseEntity<ProfClasse> getProfClasseFromNumProf(@PathVariable(value = "numProf") Integer numProf) {
         return new ResponseEntity<>(this.profClasseService.getProfClasseFromNumProf(numProf), HttpStatus.OK);
+    }
+
+    @GetMapping("classe/{numClasse}")
+    public ResponseEntity<ProfClasse> getProfClasseFromNumClasseAndPPTrue(@PathVariable(value = "numClasse") Integer numClasse) {
+        return new ResponseEntity<>(this.profClasseService.getProfClasseFromNumClasseAndPPVrai(numClasse), HttpStatus.OK);
     }
 }
