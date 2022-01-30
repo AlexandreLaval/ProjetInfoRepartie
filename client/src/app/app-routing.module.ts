@@ -9,6 +9,7 @@ import {EntrepriseCreationComponent} from "./components/entreprise/entrepriseCre
 import {EntrepriseDetailsComponent} from "./components/entreprise/entrepriseDetails.component";
 import {EntrepriseModifyComponent} from "./components/entreprise/entrepriseModify.component";
 import {LoginComponent} from "./components/login/login.component";
+import {StagiaireCreationComponent} from "./components/stagiaire/stagiaireCreation.component";
 
 const routes: Routes = [
     {
@@ -52,6 +53,19 @@ const routes: Routes = [
     {
         path: 'stagiaire',
         component: StagiaireComponent
+    },
+    {
+        path: 'stagiaire',
+        children: [
+            {
+                path: '',
+                component: StagiaireComponent,
+            },
+            {
+                path: 'creation',
+                component: StagiaireCreationComponent,
+            }
+        ]
     },
     {
         path: 'aide',
