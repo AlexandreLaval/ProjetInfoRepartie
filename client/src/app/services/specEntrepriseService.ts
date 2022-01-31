@@ -2,7 +2,6 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SpecEntreprise} from "../models/specEntreprise";
-import {Entreprise} from "../models/entreprise";
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +25,7 @@ export class SpecEntrepriseService {
         return this.http.post<SpecEntreprise>(this.url + "/creation", specEntreprise);
     }
 
-    modifyEntreprise(id:number, specEntreprise: SpecEntreprise): Observable<SpecEntreprise> {
+    modifyEntreprise(id: number, specEntreprise: SpecEntreprise): Observable<SpecEntreprise> {
         return this.http.put<SpecEntreprise>(this.url + "/modify/" + id, specEntreprise);
     }
 }

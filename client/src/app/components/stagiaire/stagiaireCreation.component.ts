@@ -136,5 +136,4 @@ export class StagiaireCreationComponent implements OnInit {
     cancel() {
         this.router.navigate(['stagiaire']);
     }
-
 }

@@ -2,18 +2,29 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {EntrepriseService} from "../../services/entrepriseService";
 import {LogInService} from "../../services/loginService";
+import {SpecEntreprise} from "../../models/specEntreprise";
+import {SpecEntrepriseService} from "../../services/specEntrepriseService";
+import {Specialite} from "../../models/specialite";
+import {SpecialiteService} from "../../services/specialiteService";
+import {Entreprise} from "../../models/entreprise";
 
 @Component({
     selector: 'app-entreprise',
     template: `
         <div class="div-margin">
             <h2>Liste des entreprises</h2>
-            <div class="ent-table" *ngIf="isProf">
+            <div class="block" *ngIf="isProf">
                 <button mat-raised-button (click)="addEntreprise()" class="demo-button div-margin">
                     Ajouter une entreprise
                 </button>
             </div>
-            <table mat-table [dataSource]="entreprises" class="mat-elevation-z8">
+            <div class="block">
+                <mat-form-field class="example-form-field" appearance="fill">
+                    <mat-label>Rechercher une entreprise</mat-label>
+                    <input matInput (change)="rechercherEntreprise($event)" placeholder="Rechercher">
+                </mat-form-field>
+            </div>
+            <table mat-table [dataSource]="entreprisesShow" class="mat-elevation-z8">
                 <!-- Opération Column -->
                 <ng-container matColumnDef="opération">
                     <th mat-header-cell *matHeaderCellDef>Opération</th>
@@ -60,7 +71,7 @@ import {LogInService} from "../../services/loginService";
                 <!-- Spécialité Column -->
                 <ng-container matColumnDef="spécialité">
                     <th mat-header-cell *matHeaderCellDef>Spécialité</th>
-                    <td mat-cell *matCellDef="let element">{{element.niveau}}</td>
+                    <td mat-cell *matCellDef="let element">{{getSpecialite(element.numEntreprise)}}</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -69,6 +80,11 @@ import {LogInService} from "../../services/loginService";
         </div>
     `,
     styles: [`
+        .block {
+            display: inline-block;
+            float: left;
+            text-align: center;
+        }
 
         .div-margin {
             margin: 20px;
@@ -82,11 +98,17 @@ import {LogInService} from "../../services/loginService";
 
 export class EntrepriseComponent implements OnInit {
     displayedColumns: string[] = ['opération', 'entreprise', 'responsable', 'adresse', 'site', 'spécialité'];
-    entreprises: any;
+    entreprises: Entreprise[] = [];
+    entreprisesShow: Entreprise[] = [];
     isProf: boolean = false;
+    specEntreprises: SpecEntreprise[] = [];
+    specialites: Specialite[] = [];
+    recherche: string = "";
 
     constructor(private router: Router,
                 private entrepriseService: EntrepriseService,
+                private specEntrepriseService: SpecEntrepriseService,
+                private specialiteService: SpecialiteService,
                 private loginService: LogInService) {
     }
 
@@ -95,12 +117,15 @@ export class EntrepriseComponent implements OnInit {
             this.router.navigate(['login']);
         }
         this.isProf = this.loginService.isProfesseur;
-        this.fetchAllEntreprises();
-    }
-
-    fetchAllEntreprises() {
+        this.specEntrepriseService.getAllSpecEntreprises().subscribe(specEnts => {
+            this.specEntreprises = specEnts;
+        })
+        this.specialiteService.getAllSpecialites().subscribe(specs => {
+            this.specialites = specs;
+        })
         this.entrepriseService.getAllEntreprises().subscribe(entreprises => {
             this.entreprises = entreprises;
+            this.entreprisesShow = entreprises;
         })
     }
 
@@ -127,9 +152,32 @@ export class EntrepriseComponent implements OnInit {
             })
     }
 
-    //todo link le fait de créer le stage avec l'entreprise préselectionnée
     inscrireStagiaire(idEntreprise: number) {
         this.router.navigate(['/inscription/creation/']);
+    }
+
+    getSpecialite(numEntreprise: number): string {
+        let specs = this.specEntreprises.filter(x => x.numEntreprise == numEntreprise);
+        var s = "";
+        specs.forEach((value => {
+            s += this.specialites.find(specialite => specialite.numSpec == value.numSpec)?.libelle;
+            s += " ";
+        }));
+        return s;
+    }
+
+    rechercherEntreprise(event: Event) {
+        this.entreprisesShow = []
+        let recherche = (event.target as HTMLInputElement).value;
+        this.entreprises.forEach(value => {
+            if (value.raisonSociale.toLowerCase().startsWith(recherche.toLowerCase(), 0)) {
+                this.entreprisesShow.push(value)
+            }
+        });
+    }
+
+    resetRecherche() {
+        this.entreprisesShow = this.entreprises;
     }
 
 }

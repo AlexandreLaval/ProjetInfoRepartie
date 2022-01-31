@@ -39,7 +39,7 @@ import {ClasseService} from "../../services/classeService";
                 <mat-form-field class="stag-form-field" appearance="fill">
                     <mat-label>Classe</mat-label>
                     <mat-select [(value)]="etudiant.numClasse">
-                        <mat-option *ngFor="let classe of classes" [value]="classe" >{{classe.nomClasse}}</mat-option>
+                        <mat-option *ngFor="let classe of classes" [value]="classe">{{classe.nomClasse}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

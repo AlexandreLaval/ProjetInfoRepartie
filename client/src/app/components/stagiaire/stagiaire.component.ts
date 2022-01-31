@@ -6,7 +6,6 @@ import {ProfesseurService} from "../../services/professeurService";
 import {EntrepriseService} from "../../services/entrepriseService";
 import {ProfClasseService} from "../../services/profClasseService";
 import {Entreprise} from "../../models/entreprise";
-import {ProfClasse} from "../../models/profClasse";
 import {Etudiant} from "../../models/etudiant";
 import {Professeur} from "../../models/professeur";
 import {Stage} from "../../models/stage";
@@ -17,12 +16,19 @@ import {StageService} from "../../services/stageService";
     template: `
         <div class="div-margin">
             <h2>Liste des etudiants</h2>
-            <div class="ent-table" *ngIf="isProf">
+            <div class="block" *ngIf="isProf">
                 <button mat-raised-button (click)="addEtudiant()" class="demo-button div-margin">
                     Ajouter un étudiant
                 </button>
             </div>
-            <table mat-table [dataSource]="etudiants" class="mat-elevation-z8">
+            <div class="block">
+                <mat-form-field class="example-form-field" appearance="fill">
+                    <mat-label>Rechercher un étudiant</mat-label>
+                    <input matInput (change)="rechercherEtudiant($event)" placeholder="Rechercher">
+                </mat-form-field>
+            </div>
+
+            <table mat-table [dataSource]="etudiantsShow" class="mat-elevation-z8">
                 <!-- Opération Column -->
                 <ng-container matColumnDef="opération">
                     <th mat-header-cell *matHeaderCellDef>Opération</th>
@@ -49,14 +55,14 @@ import {StageService} from "../../services/stageService";
                 <!-- Entreprise Column -->
                 <ng-container matColumnDef="entreprise">
                     <th mat-header-cell *matHeaderCellDef>Entreprise</th>
-                    <td mat-cell *matCellDef="let element">{{element.raisonSociale}}</td>
+                    <td mat-cell *matCellDef="let element">{{getEntrepriseRaisonSociale(element.numEtudiant)}}</td>
                 </ng-container>
 
                 <!-- Professor Column -->
-                <ng-container matColumnDef="classe">
-                    <th mat-header-cell *matHeaderCellDef>Classe</th>
+                <ng-container matColumnDef="professeur">
+                    <th mat-header-cell *matHeaderCellDef>Professeur</th>
                     <td mat-cell
-                        *matCellDef="let element">{{element.numClasse.nomClasse}}</td>
+                        *matCellDef="let element">{{getProfesseurName(element.numEtudiant)}}</td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -64,6 +70,11 @@ import {StageService} from "../../services/stageService";
             </table>
         </div>`,
     styles: [`
+        .block {
+            display: inline-block;
+            float: left;
+            text-align: center;
+        }
 
         .div-margin {
             margin: 20px;
@@ -79,12 +90,12 @@ export class StagiaireComponent implements OnInit {
     creationForm: boolean = true;
     isProf: boolean = false;
     etudiants: Etudiant[] = [];
+    etudiantsShow: Etudiant[] = [];
     professeurs: Professeur[] = [];
     services: any;
-    profClasses: ProfClasse[] = [];
     entreprises: Entreprise[] = [];
     stages: Stage[] = [];
-    displayedColumns: string[] = ['opération', 'etudiant', 'entreprise', 'classe'];
+    displayedColumns: string[] = ['opération', 'etudiant', 'entreprise', 'professeur'];
 
     constructor(private loginService: LogInService,
                 private etudiantService: EtudiantService,
@@ -102,37 +113,33 @@ export class StagiaireComponent implements OnInit {
         this.isProf = this.loginService.isProfesseur;
         this.etudiantService.getAllEtudiant().subscribe(etudiants => {
             this.etudiants = etudiants;
+            this.etudiantsShow = etudiants;
         });
         this.professeurService.getAllProfesseur().subscribe(professeurs => {
             this.professeurs = professeurs;
         });
-        this.profClasseService.getAllClasses().subscribe(profClasses => {
-            this.profClasses = profClasses;
-        });
         this.entrepriseService.getAllEntreprises().subscribe(ent => {
             this.entreprises = ent;
-
         });
         this.stageService.getAllStage().subscribe(stages => {
             this.stages = stages;
         });
     }
 
-    matchEtudiantsEntreprisesProfs() {
-        for (const etu of this.etudiants) {
-            // @ts-ignore
-            let stage = this.stages.find(stages => stages.numEtudiant.numEtudiant === etu.numEtudiant);
-            let entreprise;
-            if (stage !== undefined) {
-                // @ts-ignore
-                entreprise = this.entreprises.find(ents => ents.numEntreprise === stage.numEntreprise?.numEntreprise);
-            }
 
-        }
+    getEntrepriseRaisonSociale(numEtudiant: number) {
+        let entId = this.stages.find(stage => stage.numEtudiant?.numEtudiant == numEtudiant)?.numEntreprise?.numEntreprise;
+        if (entId == null)
+            return "";
+        return this.entreprises.find(ent => ent.numEntreprise == entId)?.raisonSociale;
     }
 
-    fetchAllEtudiant() {
-
+    getProfesseurName(numEtudiant: number) {
+        let profId = this.stages.find(stage => stage.numEtudiant?.numEtudiant == numEtudiant)?.numProf?.numProf;
+        if (profId == null)
+            return "";
+        return this.professeurs.find(prof => prof.numProf == profId)?.nomProf + " "
+            + this.professeurs.find(prof => prof.numProf == profId)?.prenomProf;
     }
 
     addEtudiant() {
@@ -156,5 +163,16 @@ export class StagiaireComponent implements OnInit {
             error => {
                 alert("Erreur lors de la suppression d'un etudiant");
             })
+    }
+
+    rechercherEtudiant(event: Event) {
+        this.etudiantsShow = []
+        let recherche = (event.target as HTMLInputElement).value;
+        this.etudiants.forEach(value => {
+            if (value.prenomEtudiant.toLowerCase().startsWith(recherche.toLowerCase(), 0) ||
+                value.nomEtudiant.toLowerCase().startsWith(recherche.toLowerCase(), 0)) {
+                this.etudiantsShow.push(value)
+            }
+        });
     }
 }
