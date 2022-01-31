@@ -1,5 +1,5 @@
 export interface Classe {
-    id: number | undefined;
+    id: number;
     nomClasse: string;
     numProf: number;
 }

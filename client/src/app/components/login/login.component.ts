@@ -70,27 +70,34 @@ export class LoginComponent {
 
     onSubmit() {
         if (this.identityLabelControl.value === "etudiant") {
-            this.loginService.authEtudiant(this.login, this.mdp).subscribe(() => {
-                    this.loginService.isConnected = true;
-                    this.loginService.isProfesseur = false;
-                    this.loginService.login.next(this.login);
-                    this.router.navigate(['']);
+            this.loginService.authEtudiant(this.login, this.mdp).subscribe(bool => {
+                    if (bool) {
+                        this.loginService.isConnected = true;
+                        this.loginService.isProfesseur = false;
+                        this.loginService.login.next(this.login);
+                        this.router.navigate(['']);
+                    } else {
+                        alert('Error mauvais identifiants de connexion')
+                    }
                 },
                 error => {
                     alert('Error mauvais identifiants de connexion')
                 })
         } else if (this.identityLabelControl.value === "professeur") {
-            this.loginService.authProfesseur(this.login, this.mdp).subscribe(() => {
-                    this.loginService.isConnected = true;
-                    this.loginService.isProfesseur = true;
-                    this.loginService.login.next(this.login);
-                    this.router.navigate(['']);
+            this.loginService.authProfesseur(this.login, this.mdp).subscribe(bool => {
+                    if (bool) {
+                        this.loginService.isConnected = true;
+                        this.loginService.isProfesseur = true;
+                        this.loginService.login.next(this.login);
+                        this.router.navigate(['']);
+                    } else {
+                        alert('Error mauvais identifiants de connexion')
+                    }
                 },
                 error => {
                     alert('Error mauvais identifiants de connexion')
                 })
-        }
-        else {
+        } else {
             alert('Veuillez sélectionner un rôle');
         }
     }

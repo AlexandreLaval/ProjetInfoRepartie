@@ -29,6 +29,8 @@ import {EntrepriseModifyComponent} from "./components/entreprise/entrepriseModif
 import {LoginComponent} from "./components/login/login.component";
 import {MatRadioModule} from "@angular/material/radio";
 import {StagiaireCreationComponent} from "./components/stagiaire/stagiaireCreation.component";
+import {StagiaireModifyComponent} from "./components/stagiaire/stagiaireModify.component";
+import {StagiaireDetailsComponent} from "./components/stagiaire/stagiaireDetails.component";
 
 @NgModule({
     declarations: [
@@ -43,7 +45,9 @@ import {StagiaireCreationComponent} from "./components/stagiaire/stagiaireCreati
         EntrepriseDetailsComponent,
         EntrepriseModifyComponent,
         AideComponent,
-        LoginComponent
+        LoginComponent,
+        StagiaireModifyComponent,
+        StagiaireDetailsComponent
     ],
     imports: [
         BrowserModule,

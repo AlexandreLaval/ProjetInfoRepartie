@@ -4,8 +4,6 @@ import {EntrepriseService} from "../../services/entrepriseService";
 import {StageService} from "../../services/stageService";
 import {SpecialiteService} from "../../services/specialiteService";
 import {SpecEntrepriseService} from "../../services/specEntrepriseService";
-import {Specialite} from "../../models/specialite";
-import {SpecEntreprise} from "../../models/specEntreprise";
 
 @Component({
     selector: 'app-entreprise-detail',
