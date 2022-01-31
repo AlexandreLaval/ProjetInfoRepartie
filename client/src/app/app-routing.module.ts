@@ -11,89 +11,90 @@ import {EntrepriseModifyComponent} from "./components/entreprise/entrepriseModif
 import {LoginComponent} from "./components/login/login.component";
 import {StagiaireCreationComponent} from "./components/stagiaire/stagiaireCreation.component";
 import {StagiaireModifyComponent} from "./components/stagiaire/stagiaireModify.component";
+import {StagiaireDetailsComponent} from "./components/stagiaire/stagiaireDetails.component";
 
 const routes: Routes = [
-    {
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'entreprise',
+    component: EntrepriseComponent
+  },
+  {
+    path: 'entreprise',
+    children: [
+      {
         path: '',
-        component: HomeComponent
-    },
-    {
-        path: 'entreprise',
-        component: EntrepriseComponent
-    },
-    {
-        path: 'entreprise',
+        component: EntrepriseComponent,
+      },
+      {
+        path: 'creation',
+        component: EntrepriseCreationComponent
+      },
+      {
+        path: ':id',
+        component: EntrepriseDetailsComponent
+      },
+      {
+        path: 'modify',
         children: [
-            {
-                path: '',
-                component: EntrepriseComponent,
-            },
-            {
-                path: 'creation',
-                component: EntrepriseCreationComponent
-            },
-            {
-                path: ':id',
-                component: EntrepriseDetailsComponent
-            },
-            {
-                path: 'modify',
-                children: [
-                    {
-                        path: ':id',
-                        component: EntrepriseModifyComponent
-                    }
-                ]
-            }
+          {
+            path: ':id',
+            component: EntrepriseModifyComponent
+          }
         ]
-    },
-    {
-        path: 'inscription/creation',
-        component: InscriptionComponent
-    },
-    {
-        path: 'stagiaire',
-        component: StagiaireComponent
-    },
-    {
-        path: 'stagiaire',
+      }
+    ]
+  },
+  {
+    path: 'inscription/creation',
+    component: InscriptionComponent
+  },
+  {
+    path: 'stagiaire',
+    component: StagiaireComponent
+  },
+  {
+    path: 'stagiaire',
+    children: [
+      {
+        path: '',
+        component: StagiaireComponent,
+      },
+      {
+        path: 'creation',
+        component: StagiaireCreationComponent,
+      },
+      {
+        path: ':id',
+        component: StagiaireDetailsComponent
+      },
+      {
+        path: 'modify',
         children: [
-            {
-                path: '',
-                component: StagiaireComponent,
-            },
-            {
-                path: 'creation',
-                component: StagiaireCreationComponent,
-            },
-           /* {
-                path: ':id',
-                component: StagiaireDetailComponent
-            },*/
-            {
-                path: 'modify',
-                children: [
-                    {
-                        path: ':id',
-                        component: StagiaireModifyComponent
-                    }
-                ]
-            }
+          {
+            path: ':id',
+            component: StagiaireModifyComponent
+          }
         ]
-    },
-    {
-        path: 'aide',
-        component: AideComponent
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    }
+      }
+    ]
+  },
+  {
+    path: 'aide',
+    component: AideComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 

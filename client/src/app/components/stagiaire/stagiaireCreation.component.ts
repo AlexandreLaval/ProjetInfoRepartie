@@ -22,11 +22,11 @@ import {ClasseService} from "../../services/classeService";
                 <br>
                 <mat-form-field class="stag-form-field" appearance="fill">
                     <mat-label>Nom d'utilisateur (8 caractères)</mat-label>
-                    <input matInput placeholder="Nom d'utilisateur" [(ngModel)]="etudiant.login">
+                    <input matInput placeholder="Nom d'utilisateur" [maxLength]="8" [(ngModel)]="etudiant.login">
                 </mat-form-field>
                 <mat-form-field class="stag-form-field" appearance="fill">
                     <mat-label>Mot de passe (entre 8 et 30 caractères)</mat-label>
-                    <input matInput placeholder="Mot de Passe" [(ngModel)]="etudiant.mdp">
+                    <input matInput placeholder="Mot de Passe" max="30" [maxLength]="30" [(ngModel)]="etudiant.mdp">
                 </mat-form-field>
                 <br>
                 <mat-form-field class="stag-form-field" appearance="fill">

@@ -30,6 +30,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {MatRadioModule} from "@angular/material/radio";
 import {StagiaireCreationComponent} from "./components/stagiaire/stagiaireCreation.component";
 import {StagiaireModifyComponent} from "./components/stagiaire/stagiaireModify.component";
+import {StagiaireDetailsComponent} from "./components/stagiaire/stagiaireDetails.component";
 
 @NgModule({
     declarations: [
@@ -45,7 +46,8 @@ import {StagiaireModifyComponent} from "./components/stagiaire/stagiaireModify.c
         EntrepriseModifyComponent,
         AideComponent,
         LoginComponent,
-        StagiaireModifyComponent
+        StagiaireModifyComponent,
+        StagiaireDetailsComponent
     ],
     imports: [
         BrowserModule,
