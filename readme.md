@@ -23,6 +23,7 @@ Puis lancez le front en selectionnnant npm et en appuyant sur le bouton play
 L'application est désormais accessible sur http://localhost:4200/
 
 
-NB :  Le port par défaut utilisé par TomCat lors du lancement du back est 8080
-      L'adresse de la bdd est localhost:3306/bdd_geststages
-      La version du sdk est 16
+NB :  
+Le port par défaut utilisé par TomCat lors du lancement du back est 8080
+L'adresse de la bdd est localhost:3306/bdd_geststages
+La version du sdk est 16
