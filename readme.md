@@ -3,24 +3,24 @@ Bonjour
 Pour lancer le projet rien de plus simple,
 
 Tout d'abord avec Xampp lancez les module Apache et MySQL
+
 ![Alt text](./imgReadme/Xampp.png)
 
+Ouvrez ensuite le dossier ProjetInfoRepartie avec IntellIJ
 
-Ensuite il vous ouvrir deux instances d'intellIJ, une sur le dossier "Client" et l'autre sur le dossier "Server"
-
-Pour l'instance IntelliJ ouvert sur le dossier Server vous devez spécifier le sdk dans edit configuration (voir captures d'écran ci dessous), le projet a été construit avec Java 16
-Vous pouvez ensuite le back de l'application depuis ProjetLavalThoralApplication
-
-![Alt text](./imgReadme/serverEditConfig1.png)
-![Alt text](./imgReadme/serverEditConfig2.png)
-
-
-Pour le front, et donc la deuxieme instance d'intellIJ celle sur Client vous devez d'abord entrer la commande "npm install" dans le terminal de l'application pour installer les dépendances (il vous faudra avoir node d'installer sur votre machine)
+Dans l'onglet Terminal (ALT + F12) en bas de l'application, placez vous dans le dossier client (cd client) et installez les dépendances avec "npm install"
 
 ![Alt text](./imgReadme/clientNpmInstall.png)
-![Alt text](./imgReadme/clientEditConfig1.png)
-![Alt text](./imgReadme/clientEditConfig2.png)
 
-Pour lancer le projet il suffit d'executer le bouton play dans "package.json" de la ligne "start : ng serve"
 
-![Alt text](./imgReadme/clientPackageJson.png)
+Dans l'onglet Services (ALT + 8) en bas de l'application vous retrouvez les deux configurations pour lancer le front (npm) et le back (Spring Boot)
+
+![Alt text](./imgReadme/configuration.png)
+
+En premier lancez le back en séléctionnant SpringBoot et en appuyant sur le bouton play
+Puis lancez le front en selectionnnant npm et en appuyant sur le bouton play
+
+L'application est désormais accessible sur http://localhost:4200/
+
+
+NB : le port par défaut utilisé par TomCat lors du lancement du back est 8080
