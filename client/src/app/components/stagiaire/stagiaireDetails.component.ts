@@ -16,6 +16,8 @@ import {EtudiantService} from "../../services/etudiantService";
                 <br>
                 <td>Anné obtention du diplôme : {{this.etudiant.anneeObtention}}</td>
                 <br>
+                <td>Classe : {{this.etudiant.numClasse.nomClasse}}</td>
+                <br>
             </mat-card-content>
         </mat-card>
     `,
