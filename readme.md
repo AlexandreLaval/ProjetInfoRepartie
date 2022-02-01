@@ -2,7 +2,7 @@ Bonjour
 
 Pour lancer le projet rien de plus simple,
 
-Tout d'abord avec Xampp lancez les module Apache et MySQL
+Tout d'abord avec Xampp lancez les modules Apache et MySQL
 
 ![Alt text](./imgReadme/Xampp.png)
 
